@@ -1,0 +1,14 @@
+.dashboard_container{
+    display: inline-flex;
+}
+.dashboard_menu{
+    // border:1px solid blue;
+    margin: auto auto ;
+    >.row, .col-sm{
+        border:1px solid blue;
+
+    }
+}
+.react-calendar{
+    width: 100% !important;
+}

@@ -1,5 +1,4 @@
 import logo from '../logo.svg';
-import './App.css';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -13,17 +12,18 @@ import {
   useLocation
 } from "react-router-dom";
 import Login from './Login';
-import './Dashboard.css';
+import './Dashboard.scss';
 import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
+import Header from './Header';
 
 class Dashboard extends Component {
   render() {
     const { signedIn, history, name } = this.props;
-
-    console.log("ijjn.jkgn?", this.props)
     return (
       <div>Dash Page
+        <Header/>
         <div>
           <Login signedIn={signedIn} history={history} />
         </div>
@@ -34,21 +34,24 @@ class Dashboard extends Component {
 
         </div>
         <div>
-          {signedIn ? <div> name: {name}</div>  : "OUT"}
+          <div> name: {name}</div>
         </div>
-        <Container fluid="md" >
+        <div className="dashboard_container">
+          <Container fluid="md" className="dashboard_menu">
           <Row>
             <Col sm>GMAIL</Col>
             <Col sm>Coba</Col>
           </Row>
           <Row>
-            <Col sm>sm=true</Col>
-            <Col sm>sm=true</Col>
+            <Col sm>Brebeuf</Col>
+            <Col sm>Moudo</Col>
           </Row>
         </Container>
         <div>
-           <Calendar/>
+            <Calendar value={new Date()} />
         </div>
+        </div>
+
 
       </div>
 
