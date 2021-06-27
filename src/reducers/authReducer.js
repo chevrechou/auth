@@ -1,13 +1,10 @@
 
 
-import { combineReducers } from 'redux';
+import {initState} from './index.js';
 
 import { REHYDRATE } from 'redux-persist';
 
-export const initState = {
-    name: "",
-    signedIn: false,
-}
+
 
 const authReducer = (state = initState, action) => {
     switch (action.type) {

@@ -13,17 +13,38 @@ import {
 } from "react-router-dom";
 import Login from './Login';
 import './Dashboard.scss';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-
 import Header from './Header';
-
+import { getScheduledEvents } from '../actions/schedule';
+import EventCalendar from './EventCalendar';
+import EventModal from './EventModal';
 class Dashboard extends Component {
+  state={
+    showEventModal:false,
+    date:""
+  }
+  onClickDay = (value) =>{
+    this.setState({
+      showEventModal:true,
+      date:""+value
+    });
+    this.props.getEvents(this.state.date);//.then(events =>console.log(events));
+  }
+  onModalClose = () => {
+    this.setState({
+      showEventModal:false,
+      date:"",
+    })
+  }
   render() {
-    const { signedIn, history, name } = this.props;
+    const { signedIn, history, name, events} = this.props;
+    const { showEventModal, date } = this.state;
+    console.log(events)
     return (
       <div>Dash Page
-        <Header/>
+        <EventModal 
+          show={showEventModal} 
+          onModalClose={this.onModalClose}
+          date={date}/>
         <div>
           <Login signedIn={signedIn} history={history} />
         </div>
@@ -48,7 +69,7 @@ class Dashboard extends Component {
           </Row>
         </Container>
         <div>
-            <Calendar value={new Date()} />
+            <EventCalendar  onClickDay={this.onClickDay}/>
         </div>
         </div>
 
@@ -62,14 +83,14 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   name: state.auth.name,
-  signedIn: state.auth.signedIn
-
+  signedIn: state.auth.signedIn,
+  events:state.scheduleReducer.events,
 
 
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  getEvents:(value) => dispatch(getScheduledEvents(value))
 
 });
 

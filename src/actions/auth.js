@@ -3,7 +3,7 @@ const signIn = (name) => (dispatch, getState) => {
     const {  signedIn } = getState().auth;
     console.log('in', signedIn, name, getState().auth)
     if (!signedIn) {
-        dispatch({ type: "SIGN_IN", name:name });
+        dispatch({ type: "SIGN_IN", name });
     }
     return ;
 };

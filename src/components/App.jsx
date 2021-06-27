@@ -20,6 +20,7 @@ import Dashboard from './Dashboard';
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import Test from './Test';
 import { loadUser } from '../actions/auth';
+import Header from './Header';
 
 
 class App extends Component {
@@ -32,9 +33,10 @@ class App extends Component {
 
   }
   render() {
-
+    const { signedIn }= this.props;
     return (
       <Router >
+        {signedIn &&<Header/>}
         <Switch>
 
           <Route exact path="/"
@@ -53,7 +55,8 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => ({
-
+  name:state.auth.name,
+  signedIn: state.auth.signedIn
 
 
 
